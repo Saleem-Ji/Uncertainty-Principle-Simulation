@@ -38,6 +38,7 @@ window.addEventListener('pageRevealed', () => {
 
   tl.from(listItems, {
     opacity: 0,
+    color: "red",
     y: -30,
     duration: DURATION,
     stagger: STAGGER,
@@ -45,11 +46,13 @@ window.addEventListener('pageRevealed', () => {
   })
   .to(border, {
     scaleX: 1,
+    color: "orange",
     duration: DURATION - 0.65,
     ease: "linear",
   }, "<")
   .from(heroSplit.chars, {
     duration: 1,
+    color: "blue",
     y: 100,
     autoAlpha: 0,
     stagger: 0.01,
@@ -57,6 +60,7 @@ window.addEventListener('pageRevealed', () => {
   }, "<")
   .from(presenterSplit.chars, {
     duration: 0.8,
+    color: "yellow",
     y: -100,
     autoAlpha: 0,
     stagger: 0.005,
@@ -84,6 +88,7 @@ window.addEventListener('pageRevealed', () => {
   .from('#heisen_name', {
     x: 50,
     opacity: 0,
+    color: "red",
     duration: 0.5,
     ease: 'back.out'
   }, '<')
