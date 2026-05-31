@@ -259,4 +259,19 @@ window.addEventListener('pageRevealed', () => {
     ease: 'back.out'
   }, '<');
 
+
+document.querySelectorAll('#nav ul li a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+
+    gsap.to(window, {
+      duration: 1.2,
+      scrollTo: { y: target, autoKill: true },
+      ease: 'power2.inOut'
+    });
+  });
+});
+  
 });
