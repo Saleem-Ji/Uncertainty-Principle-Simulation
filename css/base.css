@@ -1,7 +1,12 @@
 /* base.css
    Design tokens, CSS variables, base resets, and typography.
-   This is the foundation everything else builds on.
+   Messing with this messes with the entire website.
 */
+
+html {
+  color-scheme: light;
+}
+
 
 /* --- Color Palette & Tokens --- */
 :root {
@@ -82,9 +87,6 @@
   box-sizing: border-box;
 }
 
-html {
-  color-scheme: light;
-}
 
 body {
   margin: 0;
