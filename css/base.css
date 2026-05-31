@@ -86,7 +86,7 @@
 
 body {
   margin: 0;
-  padding: 1rem var(--page-x);
+  padding: 0 var(--page-x);
   background: var(--clr-bg);
   color: var(--clr-text);
 }
