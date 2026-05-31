@@ -94,6 +94,15 @@ body {
 nav ul li a {
   color: inherit;
   text-decoration: none;
+   padding: 0;
+   margin: 0;
+}
+
+nav ul li:hover {
+  background-color: var(--clr-yellow);
+  outline: 2px solid black;
+  box-shadow: 4px 2px 0px black !important;
+  transition: all ease 0.1s;
 }
 
 /* --- Typography Helpers --- */
