@@ -1,0 +1,252 @@
+/* layout.css
+   Page layout, navigation, hero, and main content sections.
+   Handles the big structural pieces.
+*/
+
+/* --- Navigation --- */
+nav {
+  font-size: var(--text-lg);
+  width: 100%;
+  position: relative;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
+nav ul li {
+  padding: var(--sp-xs) var(--sp-lg);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#last_nav {
+  margin-left: auto;
+}
+
+#nav_border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: black;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* --- Hero Section --- */
+#hero_section {
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#hero_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: var(--sp-hero) 0;
+}
+
+#hero_title {
+  font-size: var(--text-hero);
+  width: 100%;
+  text-shadow: 2px 0 6px rgb(225, 235, 39);
+  line-height: 1;
+}
+
+#hero_presenters {
+  font-size: var(--text-xl);
+}
+
+/* --- Strip Badge (used on section headers) --- */
+.strip {
+  background-color: var(--clr-strip);
+  display: inline-flex;
+  justify-content: center;
+  padding: var(--sp-2xs) var(--sp-sm);
+  box-shadow: var(--shadow-strip);
+  outline: 2.5px solid var(--clr-border);
+}
+
+/* --- Section Headers --- */
+.section-header {
+  display: flex;
+  justify-content: center;
+  font-size: var(--text-xl);
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-md);
+  border-bottom: var(--border);
+}
+
+/* --- Background / Heisenberg Section --- */
+#background_section {
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  gap: var(--section-gap);
+  align-items: flex-start;
+  padding: var(--section-v) 0;
+}
+
+#heisen_image_box {
+  width: 47%;
+  height: 800px;
+  outline: var(--border-heavy);
+  overflow: hidden;
+  box-shadow: var(--shadow-image);
+  flex-shrink: 0;
+}
+
+#heisen_image {
+  width: auto;
+  height: 60rem;
+  display: block;
+}
+
+#heisen_text {
+  width: 47%;
+  display: flex;
+  flex-direction: column;
+}
+
+#background_title {
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--text-xl);
+  padding-bottom: var(--sp-md);
+  margin-bottom: var(--sp-md);
+  border-bottom: var(--border);
+}
+
+#background_text {
+  font-size: var(--text-md);
+}
+
+/* --- Discovery Section --- */
+#discovery_section {
+  padding: var(--section-v) 0;
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  gap: var(--section-gap);
+}
+
+#discovery_sim {
+  width: 47%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  background: var(--clr-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-md);
+  box-shadow: var(--shadow-card);
+  flex-shrink: 0;
+}
+
+#discovery_box {
+  width: 47%;
+  display: flex;
+  flex-direction: column;
+}
+
+#discovery_title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: var(--text-xl);
+  margin-bottom: var(--sp-md);
+  border-bottom: var(--border);
+  padding-bottom: var(--sp-md);
+}
+
+#discovery_text {
+  font-size: var(--text-md);
+}
+
+/* --- Simulation Sections (shared pattern) --- */
+.sim-section {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--section-v) 0;
+}
+
+.sim-section__header {
+  display: flex;
+  justify-content: center;
+  font-size: var(--text-xl);
+  margin-bottom: var(--sp-md);
+  border-bottom: var(--border);
+  padding-bottom: var(--sp-md);
+}
+
+.sim-section__text {
+  font-size: var(--text-md);
+}
+
+/* --- Azimuthal Layout --- */
+#azim_alignment_box {
+  display: flex;
+  gap: var(--sp-xl);
+  width: 100%;
+  align-items: flex-start;
+  margin: var(--sp-xl) 0;
+}
+
+#azim_ang_sim {
+  flex: 1 1 auto;
+}
+
+#azim_control_box {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+#azim_control_box .controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+
+#azim_control_box .inline-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* --- Controls Row (shared) --- */
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-lg);
+  margin: var(--sp-md) 0 var(--sp-xl);
+}
+
+.control-group,
+.inline-controls {
+  font-family: var(--font-mono);
+  background: var(--clr-surface);
+  padding: var(--sp-2xs) var(--sp-sm);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+}

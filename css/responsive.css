@@ -1,0 +1,127 @@
+/* responsive.css
+   All media queries in one place.
+   Tablet (<=1024px), Mobile (<=768px), and Small (<=480px).
+*/
+
+/* --- Tablet --- */
+@media (max-width: 1024px) {
+  :root {
+    --text-hero: clamp(3rem, 7vw, 7rem);
+    --text-xl: 2rem;
+  }
+
+  #heisen_image_box {
+    height: 500px;
+  }
+
+  #heisen_image {
+    height: 42rem;
+  }
+
+  #azim_control_box {
+    flex: 0 0 280px;
+  }
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  :root {
+    --text-hero: clamp(2.5rem, 12vw, 5rem);
+    --text-xl: 1.75rem;
+    --text-lg: 1.1rem;
+    --page-x: 1rem;
+    --ctrl-w: 260px;
+  }
+
+  /* Nav: scrollable row */
+  nav ul {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  nav ul li {
+    padding: var(--sp-xs) var(--sp-md);
+    font-size: 1.1rem;
+  }
+
+  #last_nav {
+    margin-left: 0;
+  }
+
+  /* Hero: stack */
+  #hero_box {
+    flex-direction: column;
+  }
+
+  /* Two-column sections -> single column */
+  #background_section,
+  #discovery_section {
+    flex-direction: column;
+  }
+
+  #heisen_image_box,
+  #heisen_text,
+  #discovery_box,
+  #discovery_sim {
+    width: 100%;
+  }
+
+  #heisen_image_box {
+    height: 300px;
+  }
+
+  #heisen_image {
+    height: auto;
+    width: 100%;
+  }
+
+  /* Azimuthal: stack */
+  #azim_alignment_box {
+    flex-direction: column;
+  }
+
+  #azim_control_box {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  /* Plots */
+  #first_plot,
+  #second_plot,
+  #third_plot {
+    height: 350px;
+  }
+
+  #third_sim {
+    height: 400px;
+  }
+
+  /* Info bar */
+  .info-bar {
+    font-size: var(--text-xs);
+  }
+
+  /* Three.js controls */
+  #threeControls {
+    font-size: 10px;
+    gap: 6px;
+  }
+}
+
+/* --- Small phones --- */
+@media (max-width: 480px) {
+  :root {
+    --ctrl-w: 230px;
+  }
+
+  .filter-switch {
+    width: 240px;
+  }
+
+  #first_plot,
+  #second_plot,
+  #third_plot {
+    height: 280px;
+  }
+}

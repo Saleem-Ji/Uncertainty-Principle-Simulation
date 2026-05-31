@@ -1,0 +1,107 @@
+/* base.css
+   Design tokens, CSS variables, base resets, and typography.
+   This is the foundation everything else builds on.
+*/
+
+/* --- Color Palette & Tokens --- */
+:root {
+  /* Core colors */
+  --clr-bg:        #ffffff;
+  --clr-surface:   #f9f9f9;
+  --clr-surface-2: #f0f0f0;
+  --clr-text:      #000000;
+  --clr-text-muted:#555555;
+  --clr-border:    #000000;
+
+  /* Accent colors */
+  --clr-cyan:   rgba(61, 251, 238, 0.958);
+  --clr-yellow: rgb(255, 226, 5);
+  --clr-orange: #ff8c00;
+  --clr-strip:  yellow;
+  --clr-card:   #e2e2e2;
+
+  /* Loader */
+  --clr-loader-bg:     #050510;
+  --clr-loader-accent: #00ffff;
+
+  /* Slider fill colors (overridden per-control) */
+  --fill-left:  #aaa;
+  --fill-right: #aaa;
+
+  /* --- Spacing Scale --- */
+  --sp-2xs:  0.25rem;
+  --sp-xs:   0.5rem;
+  --sp-sm:   0.8rem;
+  --sp-md:   1rem;
+  --sp-lg:   1.5rem;
+  --sp-xl:   2rem;
+  --sp-2xl:  3rem;
+  --sp-3xl:  4rem;
+  --sp-hero: clamp(3rem, 8vw, 8rem);
+
+  /* --- Typography --- */
+  --font-display: "Jersey 25", sans-serif;
+  --font-mono:    "Space Mono", monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.85rem;
+  --text-base: 1rem;
+  --text-md:   1.2rem;
+  --text-lg:   1.5rem;
+  --text-xl:   2.5rem;
+  --text-hero: clamp(4rem, 9vw, 11rem);
+
+  /* --- Borders & Radius --- */
+  --radius-sm:   12px;
+  --radius-md:   16px;
+  --radius-lg:   20px;
+  --radius-pill: 20px;
+  --border:       2px solid var(--clr-border);
+  --border-heavy: 6px solid var(--clr-border);
+
+  /* --- Shadows --- */
+  --shadow-card:  0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-strip: 4px 4px 0 rgb(98, 92, 92);
+  --shadow-image: 12px 12px 0 rgb(11, 185, 185);
+
+  /* --- Layout --- */
+  --page-x:      clamp(1rem, 3vw, 3rem);
+  --section-gap: 6%;
+  --section-v:   clamp(3rem, 6vw, 7rem);
+
+  /* --- Slider Animation --- */
+  --speed:  0.45s;
+  --timing: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Control Width --- */
+  --ctrl-w: 300px;
+}
+
+/* --- Base Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem var(--page-x);
+  background: var(--clr-bg);
+  color: var(--clr-text);
+}
+
+/* --- Typography Helpers --- */
+.jersey {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+.mono-italic {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-style: italic;
+}

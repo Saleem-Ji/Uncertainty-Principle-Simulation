@@ -1,0 +1,135 @@
+/* components.css
+   Small reusable components: info bar, mode toggle, fire button,
+   discovery canvas overlay, and highlight colors.
+*/
+
+/* --- Info Bar --- */
+.info-bar {
+  font-family: var(--font-mono);
+  background: var(--clr-surface-2);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-xs) var(--sp-md);
+  text-align: center;
+  margin-bottom: var(--sp-xl);
+  font-size: var(--text-sm);
+  width: 100%;
+}
+
+/* --- Mode Toggle (radio switch) --- */
+.filter-switch {
+  border: 3px solid #222;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 46px;
+  width: 280px;
+  overflow: hidden;
+  background: #1a1a1a;
+  margin: 0 auto;
+}
+
+.filter-switch input {
+  display: none;
+}
+
+.filter-switch label {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.filter-switch .background {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: var(--clr-orange);
+  top: 0;
+  left: 0;
+  transition: left 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+}
+
+#option2:checked ~ .background          { left: 50%; }
+#option1:checked + label[for="option1"] { color: #000; }
+#option2:checked + label[for="option2"] { color: #000; }
+
+/* --- Discovery Canvas Overlay --- */
+#disc_canvas_container {
+  width: 100%;
+  height: 450px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  background: #050508;
+  outline: var(--border);
+}
+
+#discCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#disc_ui_overlay {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: white;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#disc_ui_overlay h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: white;
+}
+
+#disc_ui_overlay p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* --- Text Highlights --- */
+.highlight-cyan   { color: var(--clr-cyan);   font-weight: bold; }
+.highlight-orange { color: var(--clr-orange); font-weight: bold; }
+
+/* --- Fire Button --- */
+#disc_fire_btn {
+  background: var(--clr-yellow);
+  color: black;
+  border: 2px solid #000;
+  padding: 12px 36px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  box-shadow: 4px 4px 0 #000;
+  text-transform: uppercase;
+  margin-top: var(--sp-sm);
+  width: 100%;
+}
+
+#disc_fire_btn:active,
+#disc_fire_btn:disabled {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* --- Discovery Info Bar --- */
+#disc_info {
+  margin-bottom: 0;
+}

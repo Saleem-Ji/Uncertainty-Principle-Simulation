@@ -1,0 +1,391 @@
+/* sliders.css
+   Custom quantum slider framework and retro CRT-style discovery sliders.
+   This is the most complex CSS component - it overrides native range inputs
+   with a fully custom visual system.
+*/
+
+/* --- Slider Wrapper --- */
+.quantum-control-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin: 0;
+}
+
+.control-label {
+  color: var(--clr-text);
+  font-size: var(--text-md);
+  letter-spacing: 0.05em;
+}
+
+/* The slider container */
+.control {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--ctrl-w);
+  container-type: inline-size;
+}
+
+.control:focus-within,
+.control:hover {
+  --active: 1;
+}
+
+/* Native input is invisible but functional */
+.control [type='range'] {
+  width: var(--ctrl-w);
+  height: 60px;
+  opacity: 0;
+  position: relative;
+  z-index: 10;
+  cursor: grab;
+}
+
+.control [type='range']:active {
+  cursor: grabbing;
+}
+
+/* --- Tooltip --- */
+.tooltip {
+  font-size: var(--text-sm);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  pointer-events: none;
+  transform: translateY(calc(var(--shift, 0) * 50%));
+  transition: transform var(--speed) var(--timing);
+  z-index: 6;
+}
+
+.tooltip::after,
+.tooltip::before {
+  font-variant: tabular-nums;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Tooltip variants */
+.tooltip--sigma   { counter-set: low var(--value) high calc(100 - var(--value)); }
+.tooltip--sigma::before { content: 'Dx ' counter(low) '%';   color: #464747; left: 0.75rem; }
+.tooltip--sigma::after  { content: counter(high) '% Dp';     color: #bd5cff; right: 0.75rem; }
+
+.tooltip--k0   { counter-set: low var(--value) high calc(100 - var(--value)); }
+.tooltip--k0::before { content: '-k0 ' counter(low) '%'; color: #ff5c5c; left: 0.75rem; }
+.tooltip--k0::after  { content: counter(high) '% +k0'; color: #414343; right: 0.75rem; }
+
+.tooltip--dual { counter-set: low var(--value) high calc(100 - var(--value)); }
+.tooltip--dual::before { content: var(--left-label) ' ' counter(low) '%';  color: var(--left-color, #000);  left: 0.75rem; }
+.tooltip--dual::after  { content: counter(high) '% ' var(--right-label);   color: var(--right-color, #000); right: 0.75rem; }
+
+.tooltip--simple::before {
+  content: attr(data-float);
+  color: #333;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-base);
+}
+.tooltip--simple::after { display: none; }
+
+/* --- Track --- */
+.control__track {
+  height: calc(50% + (var(--shift, 0) * 50%));
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  transition: height var(--speed) var(--timing);
+  z-index: 5;
+  clip-path: inset(0 -0.25rem 0 -0.25rem round 6px);
+}
+
+.control__track-slide {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  transform: translateX(calc(-50% + (var(--value, 0) * 1cqi)));
+}
+
+/* Fill bars */
+.control__fill {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 6px;
+}
+
+.control__fill:nth-of-type(1) {
+  background: var(--fill-left);
+  right: calc(50% + 0.25rem);
+  border: 2px solid rgba(0, 0, 0, 0.35);
+}
+
+.control__fill:nth-of-type(3) {
+  background: var(--fill-right);
+  left: calc(50% + 0.25rem);
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+/* Center indicator thumb */
+.control__indicator {
+  height: 80%;
+  border-radius: 4px;
+  width: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, calc((var(--active, 0) * 0.4) + 0.6));
+  z-index: 7;
+  transform: translate(-50%, -50%);
+}
+
+/* Per-slider fill colors */
+#control-sigma   { --fill-left: var(--clr-yellow); --fill-right: var(--clr-cyan); }
+#control-k0      { --fill-left: var(--clr-cyan);   --fill-right: var(--clr-yellow); }
+#control-sigma2  { --fill-left: #e91e63;            --fill-right: #00bcd4; }
+#control-k02     { --fill-left: var(--clr-cyan);   --fill-right: var(--clr-yellow); }
+#control-time    { --fill-left: #aaa;               --fill-right: #aaa; }
+#control-l       { --fill-left: #8bc34a;            --fill-right: #ff9800; }
+#control-m0      { --fill-left: var(--clr-cyan);   --fill-right: var(--clr-yellow); }
+#control-deltaM  { --fill-left: #9c27b0;            --fill-right: #4caf50; }
+#control-threshold { --fill-left: #757575;          --fill-right: #757575; }
+#control-mInt    { --fill-left: var(--clr-cyan);   --fill-right: var(--clr-yellow); }
+
+/* =========================================================
+   Discovery Section - Retro CRT Sliders
+   ========================================================= */
+
+#disc_controls_container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 6px 0 2px;
+}
+
+.disc-retro-control {
+  background: #03030d;
+  border: 2px solid #00ffff;
+  padding: 14px 16px 10px;
+  position: relative;
+  box-shadow:
+    0 0 0 1px #002233,
+    0 0 16px rgba(0, 255, 255, 0.18),
+    inset 0 0 40px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+/* CRT scanline overlay */
+.disc-retro-control::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 255, 255, 0.018) 3px,
+    rgba(0, 255, 255, 0.018) 4px
+  );
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Corner bracket decoration */
+.disc-retro-control::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.disc-retro-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #00cccc;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.disc-retro-readout {
+  color: #aaa;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+}
+
+.disc-retro-val {
+  color: #ffff00;
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.9);
+  font-family: var(--font-mono);
+}
+
+/* Waveform preview canvas */
+.disc-wave-preview {
+  display: block;
+  width: 100%;
+  height: 52px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Aperture visualizer SVG */
+.disc-aperture-viz {
+  height: 52px;
+  margin-bottom: 12px;
+  background: #000811;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.disc-aperture-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.disc-retro-slider-row {
+  position: relative;
+  z-index: 2;
+  padding: 4px 0 2px;
+}
+
+/* --- Native range reset for retro sliders --- */
+.disc-retro-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  margin: 0;
+}
+
+/* Lambda slider - spectrum gradient track */
+.disc-lambda-range::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to right,
+    #6600cc 0%,
+    #4400ff 8%,
+    #0033ff 18%,
+    #0088ff 28%,
+    #00ccff 38%,
+    #00ffcc 48%,
+    #88ff00 58%,
+    #ffdd00 68%,
+    #ff8800 78%,
+    #ff2200 88%,
+    #cc0000 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.12);
+}
+
+.disc-lambda-range::-moz-range-track {
+  height: 10px;
+  border-radius: 1px;
+  background: linear-gradient(to right, #6600cc, #4400ff, #0088ff, #00ffcc, #ffdd00, #cc0000);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Alpha slider - aperture gradient track */
+.disc-alpha-range::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 1px;
+  background: linear-gradient(to right, #001a0d 0%, #004422 30%, #00cc66 70%, #00ff99 100%);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 6px rgba(0, 255, 136, 0.1);
+}
+
+.disc-alpha-range::-moz-range-track {
+  height: 10px;
+  border-radius: 1px;
+  background: linear-gradient(to right, #001a0d, #00ff99);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+/* Shared thumb style */
+.disc-retro-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 28px;
+  border-radius: 2px;
+  margin-top: -9px;
+  border: 2px solid #fff;
+  background: #111;
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 16px rgba(255, 255, 255, 0.45);
+  cursor: grab;
+  transition: box-shadow 0.1s;
+}
+
+.disc-retro-range:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 1),
+    0 0 28px rgba(255, 255, 255, 0.7),
+    0 0 48px rgba(255, 255, 255, 0.25);
+}
+
+.disc-retro-range::-moz-range-thumb {
+  width: 14px;
+  height: 28px;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  background: #111;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  cursor: grab;
+}
+
+.disc-retro-range:active::-moz-range-thumb {
+  cursor: grabbing;
+}
+
+/* Tick labels */
+.disc-retro-ticks {
+  display: flex;
+  justify-content: space-between;
+  color: #005555;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  line-height: 1;
+}
+
+.tick-sub {
+  color: #003333;
+  font-size: 0.52rem;
+  display: block;
+  margin-top: 2px;
+}
