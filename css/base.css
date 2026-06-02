@@ -102,7 +102,7 @@ nav ul li:hover {
   background-color: var(--clr-yellow);
   outline: 2px solid black;
   box-shadow: 4px 2px 0px black !important;
-  transition: all ease 0.1s;
+  transition: all ease 0.8s;
 }
 
 /* --- Typography Helpers --- */
