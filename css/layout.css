@@ -109,8 +109,10 @@ nav ul li {
 
 #heisen_image {
   width: auto;
-  height: 60rem;
+  height: 50rem;
   display: block;
+   position: relative;
+   right: 60px;
 }
 
 #heisen_text {
